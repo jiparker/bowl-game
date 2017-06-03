@@ -1,10 +1,10 @@
 // import * as ActionTypes from '../constants/actionTypes';
 
-import MockDate from 'mockdate';
-import { createStore } from 'redux';
+// import MockDate from 'mockdate';
+// import { createStore } from 'redux';
 
-import initialState from '../reducers/initialState';
-import rootReducer from '../reducers';
+// import initialState from '../reducers/initialState';
+// import rootReducer from '../reducers';
 
 describe('Store', () => {
   beforeAll(() => {
