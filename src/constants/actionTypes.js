@@ -1,1 +1,1 @@
-export const NOTHING = 'NOTHING';
+export const SETUP_WORKSTATIONS = 'SETUP_WORKSTATIONS';

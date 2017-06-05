@@ -7,7 +7,7 @@ const AboutPage = () => {
     <div>
       <h2 className="alt-header">About</h2>
       <p>
-        About this stuff.
+        About stuff.
       </p>
       <p>
         <Link to="/badlink">Click this bad link</Link>
