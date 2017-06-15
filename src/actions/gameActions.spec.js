@@ -8,10 +8,12 @@ describe('Actions', () => {
   };
   it('should create an action to setup workstations', () => {
     const value = 10;
-    const actual = ActionCreators.setupWorkstations(appState, value);
+    const fieldName = 'workstationCount';
+    const actual = ActionCreators.setupWorkstations(appState, fieldName, value);
     const expected = {
       type: ActionTypes.SETUP_WORKSTATIONS,
       settings: appState,
+      fieldName,
       value
     };
 

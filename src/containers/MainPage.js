@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../actions/GameActions';
+import * as actions from '../actions/gameActions';
 import GameSettingsForm from '../components/GameSettingsForm';
 
 export const MainPage = (props) => {
