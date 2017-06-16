@@ -6,7 +6,9 @@ import GameSettingsForm from '../components/GameSettingsForm';
 describe('<MainPage />', () => {
   it('should contain <GameSettingsForm />', () => {
     const actions = {
-      setupWorkstations: () => {}
+      setupWorkstations: () => {},
+      runIterations: () => {},
+      setIterationCount: () => {}
     };
     const gameData = {};
     const wrapper = shallow(<MainPage actions={actions} gameData={gameData}/>);

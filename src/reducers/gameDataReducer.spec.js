@@ -3,9 +3,7 @@ import reducer from './gameDataReducer';
 
 describe('Reducers::GameData', () => {
   const getInitialState = () => {
-    return {
-      workstationCount: ''
-    };
+    return { "doneCount": 0, "iterationCount": 1, "runsCount": 0, "workstationCount": "", "workstations": [] };
   };
 
   const getAppState = () => {

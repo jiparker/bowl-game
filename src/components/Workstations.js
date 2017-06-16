@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Workstation from './Workstation';
+import DoneBucket from './DoneBucket';
 
 const Workstations = (props) => {
 
@@ -9,9 +10,11 @@ const Workstations = (props) => {
     let ws = (<Workstation key={props.gameData.workstations[i].id} workstation={props.gameData.workstations[i]}/>);
     items.push(ws);
   }
+  let done = <DoneBucket key={items.length + 1} doneCount={props.gameData.doneCount} runsCount={props.gameData.runsCount}/>;
   if (items.length > 0) {
+    items.push(done);
     return (
-      <div>{items}</div>
+      <tr>{items}</tr>
     );
   } else {
     return (null);

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const TextInput = (props) => {
   const handleChange = (e) => {
-    props.onChange(props.name, e.target.value);
+    props.onChange(props.name, parseInt(e.target.value));
   };
   return (<input className="small " type="text" placeholder={props.placeholder} value={props.value} onChange={handleChange}/>);
 };

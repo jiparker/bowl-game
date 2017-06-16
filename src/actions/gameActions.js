@@ -8,3 +8,19 @@ export function setupWorkstations(settings, fieldName, value) {
     value
   };
 }
+
+export function setIterationCount(settings, fieldName, value) {
+  return {
+    type: types.SET_ITERATION_COUNT,
+    settings,
+    fieldName,
+    value
+  };
+}
+
+export function runIterations(settings) {
+  return {
+    type: types.RUN_ITERATIONS,
+    settings
+  };
+}

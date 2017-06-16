@@ -6,17 +6,17 @@ describe('< />', () => {
 
   it('should contain <TextInput/> component', () => {
     const setupWorkstations = () => {};
+    const setIterationCount = () => {};
+    const runIterations = () => {};
     const gameData = {
       workstationCount: 5
     };
 
-    const wrapper = shallow(<GameSettingsForm setupWorkstations={setupWorkstations} gameData={gameData}/>);
+    const wrapper = shallow(<GameSettingsForm setupWorkstations={setupWorkstations} setIterationCount={setIterationCount} runIterations={runIterations} gameData={gameData}/>);
 
     const allInputs = wrapper.find(TextInput);
-    expect(allInputs.length).toEqual(1);
+    expect(allInputs.length).toEqual(2);
     expect(allInputs.at(0).props().name).toEqual('workstationCount');
     expect(allInputs.at(0).props().placeholder).toEqual('enter number');
   });
-
-  it('should call')
 });

@@ -6,7 +6,7 @@ import * as actions from '../actions/gameActions';
 import GameSettingsForm from '../components/GameSettingsForm';
 
 export const MainPage = (props) => {
-  return (<GameSettingsForm setupWorkstations={props.actions.setupWorkstations} gameData={props.gameData}/>);
+  return (<GameSettingsForm setupWorkstations={props.actions.setupWorkstations} setIterationCount={props.actions.setIterationCount} runIterations={props.actions.runIterations} gameData={props.gameData}/>);
 };
 
 MainPage.propTypes = {
