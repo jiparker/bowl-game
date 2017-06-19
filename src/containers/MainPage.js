@@ -4,9 +4,20 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/gameActions';
 import GameSettingsForm from '../components/GameSettingsForm';
+import Workstations from '../components/Workstations';
 
 export const MainPage = (props) => {
-  return (<GameSettingsForm setupWorkstations={props.actions.setupWorkstations} setIterationCount={props.actions.setIterationCount} runIterations={props.actions.runIterations} gameData={props.gameData}/>);
+  return (
+
+    <main>
+      <GameSettingsForm setupWorkstations={props.actions.setupWorkstations} setIterationCount={props.actions.setIterationCount} runIterations={props.actions.runIterations} gameData={props.gameData}/>
+      <table>
+        <tbody>
+          <Workstations gameData={props.gameData}/>
+        </tbody>
+      </table>
+    </main>
+  );
 };
 
 MainPage.propTypes = {

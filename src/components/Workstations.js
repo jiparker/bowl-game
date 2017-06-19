@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Workstation from './Workstation';
 import DoneBucket from './DoneBucket';
+import QueueItems from './QueueItems'
 
 const Workstations = (props) => {
 
@@ -14,7 +15,7 @@ const Workstations = (props) => {
   if (items.length > 0) {
     items.push(done);
     return (
-      <tr>{items}</tr>
+      <tr>{items}<QueueItems queueSize={props.gameData.doneCount}/></tr>
     );
   } else {
     return (null);

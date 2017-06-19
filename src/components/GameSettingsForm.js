@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextInput from './TextInput';
-import Workstations from './Workstations';
+
 // import Report from './Report';
 
 class GameSettingsForm extends React.Component {
@@ -28,34 +28,26 @@ class GameSettingsForm extends React.Component {
     const {gameData} = this.props;
 
     return (
-      <div>
-        <h2>title</h2>
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <label htmlFor="workstationCount">Number of Workstations</label>
-              </td>
-              <td><TextInput onChange={this.workstationCountKeyPress} name="workstationCount" placeholder="enter number" value={gameData.workstationCount}/>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label htmlFor="interationCount">Number of Iterations</label>
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <label htmlFor="workstationCount">Number of Workstations</label>
+            </td>
+            <td><TextInput onChange={this.workstationCountKeyPress} name="workstationCount" placeholder="enter number" value={gameData.workstationCount}/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label htmlFor="interationCount">Number of Iterations</label>
 
-              </td>
-              <td><TextInput onChange={this.iterationCountKeyPress} name="iterationCount" placeholder="enter number" value={gameData.iterationCount}/>
-                <button onClick={this.runIterations}>Go</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <table>
-          <tbody>
-            <Workstations gameData={gameData}/>
-          </tbody>
-        </table>
-      </div>
+            </td>
+            <td><TextInput onChange={this.iterationCountKeyPress} name="iterationCount" placeholder="enter number" value={gameData.iterationCount}/>
+              <button onClick={this.runIterations}>Go</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     );
   }
 }
