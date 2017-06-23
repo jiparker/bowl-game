@@ -1,17 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import QueueItems from './QueueItems'
 
 const DoneBucket = (props) => {
-  let total = `Total Processed:  ${props.doneCount}`;
-  let runs = `Total Runs:  ${props.runsCount}`;
+  let total = `Total Processed: ${props.doneCount}`;
+  let runs = `Total Runs: ${props.runsCount}`;
   let avg = Math.round(props.doneCount / props.runsCount * 100) / 100;
-  let avgText = `Average Processed/Run:  ${avg}`;
+  let avgText = `Avg/Run: ${avg}`;
   return (
-    <td>
+    <div className="bucket">
+      <div className="queue done">
+        <QueueItems queueSize={props.doneCount}/>
+      </div>
       <div>{total}</div>
       <div>{runs}</div>
       <div>{avgText}</div>
-    </td>
+    </div>
   );
 };
 DoneBucket.propTypes = {

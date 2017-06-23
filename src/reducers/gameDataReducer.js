@@ -13,7 +13,7 @@ export default function gameDataReducer(state = initialState.gameData, action) {
       newState.workstations = [];
       for (let i = 0; i < newState.workstationCount; i++) {
         let ws = { id: i + 1, queueSize: 0, incomingQueueSize: 0 };
-        if (i == 0) { ws.queueSize = 10000; }
+        if (i == 0) { ws.queueSize = 13; }
         newState.workstations.push(ws);
       }
       return newState;
