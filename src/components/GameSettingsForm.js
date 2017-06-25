@@ -39,8 +39,7 @@ class GameSettingsForm extends React.Component {
           </tr>
           <tr>
             <td>
-              <label htmlFor="interationCount">Number of Iterations</label>
-
+              <label htmlFor="interationCount">Number of Turns</label>
             </td>
             <td><TextInput onChange={this.iterationCountKeyPress} name="iterationCount" placeholder="enter number" value={gameData.iterationCount}/>
               <button onClick={this.runIterations}>Go</button>
