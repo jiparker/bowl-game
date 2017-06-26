@@ -10,7 +10,7 @@ export const MainPage = (props) => {
   return (
 
     <main>
-      <GameSettingsForm setupWorkstations={props.actions.setupWorkstations} setIterationCount={props.actions.setIterationCount} runIterations={props.actions.runIterations} gameData={props.gameData}/>
+      <GameSettingsForm setupWorkstations={props.actions.setupWorkstations} setIterationCount={props.actions.setIterationCount} runIterations={props.actions.runIterations} gameData={props.gameData} runTurns={props.actions.runTurns}/>
       <table>
         <tbody>
           <Workstations gameData={props.gameData}/>
