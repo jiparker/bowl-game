@@ -10,6 +10,7 @@ class GameSettingsForm extends React.Component {
     this.workstationCountKeyPress = this.workstationCountKeyPress.bind(this);
     this.iterationCountKeyPress = this.iterationCountKeyPress.bind(this);
     this.runIterations = this.runIterations.bind(this);
+    this.runTurns = this.runTurns.bind(this);
   }
 
   workstationCountKeyPress(name, value) {
@@ -22,6 +23,10 @@ class GameSettingsForm extends React.Component {
 
   runIterations() {
     this.props.runIterations(this.props.gameData);
+  }
+
+  runTurns() {
+    this.props.runTurns(this.props.gameData);
   }
 
   render() {
@@ -42,7 +47,7 @@ class GameSettingsForm extends React.Component {
               <label htmlFor="interationCount">Number of Turns</label>
             </td>
             <td><TextInput onChange={this.iterationCountKeyPress} name="iterationCount" placeholder="enter number" value={gameData.iterationCount}/>
-              <button onClick={this.runIterations}>Go</button>
+              <button onClick={this.runTurns}>Go</button>
             </td>
           </tr>
         </tbody>
@@ -54,6 +59,7 @@ GameSettingsForm.propTypes = {
   setupWorkstations: PropTypes.func.isRequired,
   setIterationCount: PropTypes.func.isRequired,
   runIterations: PropTypes.func.isRequired,
+  runTurns: PropTypes.func.isRequired,
   gameData: PropTypes.object.isRequired
 };
 

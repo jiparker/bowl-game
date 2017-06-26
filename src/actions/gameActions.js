@@ -24,3 +24,10 @@ export function runIterations(settings) {
     settings
   };
 }
+
+export function runTurns(settings) {
+  return {
+    type: types.RUN_TURNS,
+    settings
+  };
+}

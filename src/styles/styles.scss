@@ -4,6 +4,7 @@ $fg-blue: #1f37bb;
 $hi-lite-blue: #949fde;
 $ball-color: #3B3B00;
 $background: #f5f5f5;
+$hi-lite-player: #d3d5e8;
 
 /* Styles */
 body {
@@ -115,8 +116,28 @@ div.queue.done{
 
 img {
     position: relative;
-    left: 27px;
+    left:4px;
+
 }
+
+div.player{
+  margin-top: 36px;
+  margin-left: 18px;
+  width: 55px;
+  -webkit-border-radius: 35px;
+  -moz-border-radius: 35px;
+  border-radius: 35px;
+}
+
+div.player.current {
+  background-color: $hi-lite-player;
+  box-shadow: #d3d5e8 -1px 0px 19px 11px;
+
+    -webkit-box-shadow: $hi-lite-player -1px 0px 19px 11px;
+    -moz-box-shadow: $hi-lite-player -1px 0px 19px 11px;
+    box-shadow: $hi-lite-player -1px 0px 19px 11px;
+}
+
 
 // div.bucket {
 //   width:100px;
