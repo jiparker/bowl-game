@@ -90,13 +90,13 @@ div.ball.off {
   background-color: $background;
 }
 
-
 div.balls {
     position: relative;
     bottom: 44px;
     left: 4px;
     width: 60px;
 }
+
 div.queue{
   width:68px;
   height:5px;
@@ -107,8 +107,9 @@ div.queue{
   border-top:none;
   position: relative;
   top:33px;
-  left:0;
+  left:-43px;
 }
+
 div.queue.done{
   top:-5px;
   left:64px;
@@ -117,13 +118,12 @@ div.queue.done{
 img {
     position: relative;
     left:4px;
-
 }
 
 div.player{
   margin-top: 36px;
   margin-left: 18px;
-  width: 55px;
+  width: 65px;
   -webkit-border-radius: 35px;
   -moz-border-radius: 35px;
   border-radius: 35px;
@@ -137,8 +137,3 @@ div.player.current {
     -moz-box-shadow: $hi-lite-player -1px 0px 19px 11px;
     box-shadow: $hi-lite-player -1px 0px 19px 11px;
 }
-
-
-// div.bucket {
-//   width:100px;
-// }

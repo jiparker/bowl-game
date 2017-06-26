@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import QueueItems from './QueueItems'
+import QueueItems from './QueueItems';
 
 const DoneBucket = (props) => {
   let total = `Total Processed: ${props.doneCount}`;
-  let runs = `Total Runs: ${props.runsCount}`;
+  let runs = `Total Iterations: ${props.runsCount}`; // how many times everybody has had a turn
   let avg = Math.round(props.doneCount / props.runsCount * 100) / 100;
-  let avgText = `Avg/Run: ${avg}`;
+  let avgText = `Avg/Iteration: ${avg}`;
   return (
     <div className="bucket">
       <div className="queue done">
