@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import QueueItems from './QueueItems';
+import Dice from './Dice';
 
 const Workstation = (props) => {
   let clazz = props.currentWorkstation
@@ -15,17 +16,14 @@ const Workstation = (props) => {
       <div className={clazz}>
         {image}
       </div>
+      <div>
+        <Dice num={4}/>
+      </div>
     </td>
   );
   return (station);
 };
-//     let imageNumber = getRandomInt(1, 10);
-// let image = <img src={require(`../images/Player${imageNumber}.png`)} className="img"/>;
-// function getRandomInt(min, max) {
-//   min = Math.ceil(min);
-//   max = Math.floor(max);
-//   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-// }
+
 Workstation.propTypes = {
   workstation: PropTypes.object.isRequired
 };

@@ -3,8 +3,9 @@ $bg-blue: #c8cce6;
 $fg-blue: #1f37bb;
 $hi-lite-blue: #949fde;
 $ball-color: #3B3B00;
-$background: #f5f5f5;
+$background: #e6e6a0;
 $hi-lite-player: #d3d5e8;
+
 
 /* Styles */
 body {
@@ -16,7 +17,7 @@ body {
   -moz-font-smoothing: antialiased;
   font-smoothing: antialiased;
   font-weight: 300;
-  background: $background;
+  background-color: $background;
 }
 
 td {
