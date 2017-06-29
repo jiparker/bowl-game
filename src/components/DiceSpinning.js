@@ -1,11 +1,11 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
-const DiceSpinning = () => {
-
+const DiceSpinning = (props) => {
+  let color = `color-${props.colorNumber}`;
   return (
     <div>
-      <div id="wrapper">
+      <div id="wrapper" className={color}>
         <div id="platform">
           <div id="dice">
             <div className="side front">
@@ -55,6 +55,9 @@ const DiceSpinning = () => {
       </div>
     </div>
   );
+};
+DiceSpinning.propTypes = {
+  colorNumber: PropTypes.number.isRequired
 };
 
 export default DiceSpinning;

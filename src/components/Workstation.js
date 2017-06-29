@@ -17,7 +17,7 @@ const Workstation = (props) => {
         {image}
       </div>
       <div>
-        <Dice num={4}/>
+        <Dice num={4} colorNumber={props.workstation.imageNumber}/>
       </div>
     </td>
   );

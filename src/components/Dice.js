@@ -5,12 +5,13 @@ import DiceSpinning from './DiceSpinning';
 const Dice = (props) => {
   let stuff = `num: ${props.num}`;
   return (
-    <div>{stuff}<DiceSpinning/></div>
+    <div>{stuff}<DiceSpinning colorNumber={props.colorNumber}/></div>
   );
 };
 
 Dice.propTypes = {
-  num: PropTypes.number.isRequired
+  num: PropTypes.number.isRequired,
+  colorNumber: PropTypes.number.isRequired
 };
 
 export default Dice;
