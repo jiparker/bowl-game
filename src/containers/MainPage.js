@@ -7,13 +7,23 @@ import GameSettingsForm from '../components/GameSettingsForm';
 import Workstations from '../components/Workstations';
 
 export const MainPage = (props) => {
+  let setUp = props.actions.setupWorkstations;
+  let setCount = props.actions.setIterationCount;
+  let runIts = props.actions.runIterations;
+  let runTs = props.actions.runTurns;
+  let timerActions = {
+    start: props.actions.timerStart,
+    trigger: props.actions.timerTrigger,
+    stop: props.actions.timerStop
+  };
+
   return (
 
     <main>
-      <GameSettingsForm setupWorkstations={props.actions.setupWorkstations} setIterationCount={props.actions.setIterationCount} runIterations={props.actions.runIterations} gameData={props.gameData} runTurns={props.actions.runTurns}/>
+      <GameSettingsForm setupWorkstations={setUp} setIterationCount={setCount} runIterations={runIts} runTurns={runTs} gameData={props.gameData}/>
       <table>
         <tbody>
-          <Workstations gameData={props.gameData}/>
+          <Workstations gameData={props.gameData} timerActions={timerActions}/>
         </tbody>
       </table>
     </main>

@@ -35,7 +35,7 @@ export default function gameDataReducer(state = initialState.gameData, action) {
 
         newState.workstations = [];
         for (let i = 0; i < newState.workstationCount; i++) {
-          let ws = { id: i + 1, queueSize: 0, incomingQueueSize: 0, imageNumber: getRandomInt(i) };
+          let ws = { id: i + 1, queueSize: 0, incomingQueueSize: 0, imageNumber: getRandomInt(i), variantCapacity: 1 };
           if (i == 0) { ws.queueSize = 2000; }
           newState.workstations.push(ws);
         }
@@ -72,8 +72,8 @@ export default function gameDataReducer(state = initialState.gameData, action) {
               return;
             };
 
-            // let currentCapacity = newState.workstations[j].variantCapacity
             let currentCapacity = 1;
+            newState.workstations[i].variantCapacity = currentCapacity;
             if (newWorkstations[j].queueSize >= currentCapacity) {
               addToNextBucket(currentCapacity);
               newWorkstations[j].queueSize -= currentCapacity;
@@ -115,8 +115,8 @@ export default function gameDataReducer(state = initialState.gameData, action) {
             return;
           };
 
-          // let currentCapacity = newState.workstations[j].variantCapacity
           let currentCapacity = 1;
+          newState.workstations[i].variantCapacity = currentCapacity;
           if (newWorkstations[newState.currentWorkstation].queueSize >= currentCapacity) {
             addToNextBucket(currentCapacity);
             newWorkstations[newState.currentWorkstation].queueSize -= currentCapacity;

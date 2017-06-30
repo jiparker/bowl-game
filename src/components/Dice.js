@@ -11,7 +11,8 @@ const Dice = (props) => {
 
 Dice.propTypes = {
   num: PropTypes.number.isRequired,
-  colorNumber: PropTypes.number.isRequired
+  colorNumber: PropTypes.number.isRequired,
+  timerActions: PropTypes.object.isRequired
 };
 
 export default Dice;

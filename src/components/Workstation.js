@@ -17,7 +17,7 @@ const Workstation = (props) => {
         {image}
       </div>
       <div>
-        <Dice num={4} colorNumber={props.workstation.imageNumber}/>
+        <Dice num={props.workstation.variantCapacity} colorNumber={props.workstation.imageNumber} spinning={props.workstation.spinning} timerActions={props.timerActions}/>
       </div>
     </td>
   );
@@ -25,7 +25,8 @@ const Workstation = (props) => {
 };
 
 Workstation.propTypes = {
-  workstation: PropTypes.object.isRequired
+  workstation: PropTypes.object.isRequired,
+  timerActions: PropTypes.object.isRequired
 };
 
 export default Workstation;

@@ -31,3 +31,22 @@ export function runTurns(settings) {
     settings
   };
 }
+
+export function timerStart(timer) {
+  return {
+    type: types.TIMER_START,
+    timer
+  };
+}
+export function timerTrigger(timer) {
+  return {
+    type: types.TIMER_TRIGGER,
+    timer
+  };
+}
+export function timerStop(timer) {
+  return {
+    type: types.TIMER_STOP,
+    timer
+  };
+}
