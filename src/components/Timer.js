@@ -1,31 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {ROLL_MS} from '../constants/main';
 
 class Timer extends React.Component {
   constructor(props, context) {
     super(props, context);
-
+    this.trigger = this.trigger.bind(this);
   }
 
-  componentDidMount() {
-    let timer = setInterval(this.trigger(), this.props.intervalLength);
-    this.start(timer);
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.continue) {
+      let timer = setTimeout(this.trigger, ROLL_MS);
+      this.start(timer);
+    }
   }
 
   componentWillUnmount() {
-
+    if (this.props.timer) {
+      clearTimeout(this.props.timer);
+    }
   }
 
   start(timer) {
-    this.props.timerActions.timerStart(timer);
+    this.props.timerActions.start(timer);
   }
 
   trigger() {
-    this.props.timerActions.timerTrigger();
-  }
-
-  stop(timer) {
-    this.props.timerActions.timerStop(timer);
+    this.props.timerActions.trigger();
   }
 
   render() {
@@ -35,7 +36,8 @@ class Timer extends React.Component {
 
 Timer.propTypes = {
   intervalLength: PropTypes.number.isRequired,
-  timerActions: PropTypes.object.isRequired
+  timerActions: PropTypes.object.isRequired,
+  timer: PropTypes.number.isRequired
 };
 
 export default Timer;

@@ -5,22 +5,27 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../actions/gameActions';
 import GameSettingsForm from '../components/GameSettingsForm';
 import Workstations from '../components/Workstations';
+import Timer from '../components/Timer';
 
 export const MainPage = (props) => {
   let setUp = props.actions.setupWorkstations;
   let setCount = props.actions.setIterationCount;
-  let runIts = props.actions.runIterations;
+  let runT = props.actions.runTurn;
   let runTs = props.actions.runTurns;
   let timerActions = {
     start: props.actions.timerStart,
     trigger: props.actions.timerTrigger,
     stop: props.actions.timerStop
   };
-
+  let timer = (
+    <div>
+      <Timer timerActions={timerActions} timer={0} intervalLength={0} continue={props.gameData.continue}/>
+    </div>
+  );
   return (
 
     <main>
-      <GameSettingsForm setupWorkstations={setUp} setIterationCount={setCount} runIterations={runIts} runTurns={runTs} gameData={props.gameData}/>
+      <GameSettingsForm setupWorkstations={setUp} setIterationCount={setCount} runTurn={runT} runTurns={runTs} gameData={props.gameData}/> {timer}
       <table>
         <tbody>
           <Workstations gameData={props.gameData} timerActions={timerActions}/>

@@ -49,7 +49,10 @@ $dice20px: 20px * $scale;
     100% { transform: translate3d($dice-200px,$dice-50px,$dice-400px) }
 }
 #platform > #dice {
-    animation: spin-duplicate 19s infinite linear;
+    animation: spin-duplicate 1s infinite linear;
+}
+#empty {
+  padding-top: 18px;
 }
 
 #wrapper {
@@ -59,6 +62,15 @@ $dice20px: 20px * $scale;
     margin: 0 auto;
     perspective: $dice1200px;
 }
+
+#stationary {
+  position: relative;
+  width: $dice200px;
+  padding-top: 18px;
+  margin: 0 auto;
+  perspective: $dice1200px;
+}
+
 #platform {
   margin-top: -11px;
   margin-left: 3px;
@@ -78,75 +90,77 @@ $dice20px: 20px * $scale;
     animation: spin 50s infinite linear;
 }
 //slight lite blue
-div#wrapper.color-1 {
+div#wrapper.color-1, div#stationary.color-1 {
   .side {
     background: #bcd0dc;
     box-shadow:inset 0 0 $dice40px #96bbd2;
   }
 }
 //orange
-div#wrapper.color-2 {
+div#wrapper.color-2, div#stationary.color-2 {
   .side {
     background: #e4af5c;
     box-shadow:inset 0 0 $dice40px #cc8b26;
   }
 }
 //gray
-div#wrapper.color-3 {
+div#wrapper.color-3, div#stationary.color-3 {
   .side {
     background: #afabab;
     box-shadow:inset 0 0 $dice40px #8e8989;
   }
 }
 //green
-div#wrapper.color-4 {
+div#wrapper.color-4, div#stationary.color-4 {
   .side {
     background: #abc799;
     box-shadow:inset 0 0 $dice40px #97c37b;
   }
 }
 //red
-div#wrapper.color-5 {
+div#wrapper.color-5, div#stationary.color-5 {
   .side {
     background: #d8a5a5;
     box-shadow:inset 0 0 $dice40px #ce8888;
   }
 }
 //white
-div#wrapper.color-6 {
+div#wrapper.color-6, div#stationary.color-6 {
   .side {
     background: #dadada;
     box-shadow:inset 0 0 $dice40px #ccc;
   }
 }
 //yellow
-div#wrapper.color-7 {
+div#wrapper.color-7, div#stationary.color-7 {
   .side {
     background: #f5e170;
     box-shadow:inset 0 0 $dice40px #ceba4c;
   }
 }
 //dark gray purple
-div#wrapper.color-8 {
+div#wrapper.color-8, div#stationary.color-8 {
   .side {
     background: #ac9db7;
     box-shadow:inset 0 0 $dice40px #7d7186;
   }
 }
 //bright lite blue
-div#wrapper.color-9 {
+div#wrapper.color-9, div#stationary.color-9 {
   .side {
     background: #86dae8;
     box-shadow:inset 0 0 $dice40px #78beca;
   }
 }
 //brown
-div#wrapper.color-10 {
+div#wrapper.color-10, div#stationary.color-10 {
   .side {
     background: #d2bb9f;
     box-shadow:inset 0 0 $dice40px #c1b8ac;
   }
 }
+
+
 
 .side {
     position: absolute;

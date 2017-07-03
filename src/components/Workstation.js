@@ -17,7 +17,7 @@ const Workstation = (props) => {
         {image}
       </div>
       <div>
-        <Dice num={props.workstation.variantCapacity} colorNumber={props.workstation.imageNumber} spinning={props.workstation.spinning} timerActions={props.timerActions}/>
+        <Dice dice={props.workstation.dice} colorNumber={props.workstation.imageNumber} variantCapacity={props.workstation.variantCapacity}/>
       </div>
     </td>
   );

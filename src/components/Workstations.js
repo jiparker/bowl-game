@@ -7,7 +7,7 @@ const Workstations = (props) => {
 
   let items = [];
   for (let i = 0; i < props.gameData.workstations.length; i++) {
-    let ws = (<Workstation key={props.gameData.workstations[i].id} workstation={props.gameData.workstations[i]} currentWorkstation={props.gameData.currentWorkstation == i} timerActions={props.timerActions}/>);
+    let ws = (<Workstation key={props.gameData.workstations[i].id} workstation={props.gameData.workstations[i]} currentWorkstation={props.gameData.currentWorkstationId == i} timerActions={props.timerActions}/>);
     items.push(ws);
   }
   let done = (

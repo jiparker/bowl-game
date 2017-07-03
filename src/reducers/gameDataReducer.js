@@ -1,30 +1,34 @@
-import { SETUP_WORKSTATIONS, SET_ITERATION_COUNT, RUN_ITERATIONS, RUN_TURNS } from '../constants/actionTypes';
+import { SETUP_WORKSTATIONS, SET_ITERATION_COUNT, RUN_TURNS, RUN_TURN, ROLL, TIMER_START, TIMER_TRIGGER } from '../constants/actionTypes';
 import objectAssign from 'object-assign';
 import initialState from './initialState';
+import workstationHelper from '../utils/workstationHelper';
 
 export default function gameDataReducer(state = initialState.gameData, action) {
+  const SPINNING = "spinning";
+  const NOT_SPINNING = "not spinning";
   let newState;
 
   switch (action.type) {
+    case TIMER_START:
+      {
+        let newWorkstation = { ...state.workstations[state.currentWorkstationId], dice: { status: SPINNING } };
+        return Object.assign({}, state, {
+          timer: action.timer,
+          continue: false,
+          workstations: workstationHelper().update(state.workstations, state.currentWorkstationId, newWorkstation)
+        });
+      }
+    case TIMER_TRIGGER:
+      {
+        let newWorkstation = { ...state.workstations[state.currentWorkstationId], dice: { status: NOT_SPINNING } };
+        return Object.assign({}, state, {
+          timer: action.timer,
+          workstations: workstationHelper().update(state.workstations, state.currentWorkstationId, newWorkstation)
+        });
+      }
     case SETUP_WORKSTATIONS:
       {
-
-
-        let shuffle = (array) => {
-          let i = array.length,
-            j = 0,
-            temp;
-
-          while (i--) {
-            j = Math.floor(Math.random() * (i + 1));
-            temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
-          }
-          return array;
-        };
-
-        let randomNumbers = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        let randomNumbers = workstationHelper().shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
         let getRandomInt = (index) => {
           index = index % 10;
           return randomNumbers[index];
@@ -35,7 +39,7 @@ export default function gameDataReducer(state = initialState.gameData, action) {
 
         newState.workstations = [];
         for (let i = 0; i < newState.workstationCount; i++) {
-          let ws = { id: i + 1, queueSize: 0, incomingQueueSize: 0, imageNumber: getRandomInt(i), variantCapacity: 1 };
+          let ws = { id: i + 1, queueSize: 0, incomingQueueSize: 0, imageNumber: getRandomInt(i), variantCapacity: 1, dice: { status: "no dice" } };
           if (i == 0) { ws.queueSize = 2000; }
           newState.workstations.push(ws);
         }
@@ -46,53 +50,66 @@ export default function gameDataReducer(state = initialState.gameData, action) {
       newState[action.fieldName] = action.value;
       return newState;
 
-    case RUN_ITERATIONS:
+    case ROLL:
       {
-        //new state
         newState = objectAssign({}, state);
-        let newWorkstations = state.workstations.map((w) => {
-          return { ...w };
-        });
+        newState.continue = true;
+        return newState;
 
-        for (let i = 0; i < state.iterationCount; i++) {
-          newState.runsCount++;
-
-          //reset current Incoming queue size
-          for (let j = 0; j < state.workstationCount; j++) {
-            newWorkstations[j].incomingQueueSize = 0;
-          }
-
-          for (let j = 0; j < state.workstationCount; j++) {
-            let addToNextBucket = (itemCountToAdd) => {
-              if (j == newState.workstationCount - 1) {
-                newState.doneCount += itemCountToAdd;
-              } else {
-                newWorkstations[j + 1].incomingQueueSize += itemCountToAdd;
-              }
-              return;
-            };
-
-            let currentCapacity = 1;
-            newState.workstations[i].variantCapacity = currentCapacity;
-            if (newWorkstations[j].queueSize >= currentCapacity) {
-              addToNextBucket(currentCapacity);
-              newWorkstations[j].queueSize -= currentCapacity;
-            } else if (newWorkstations[j].queueSize < currentCapacity) {
-              addToNextBucket(newWorkstations[j].queueSize);
-              newWorkstations[j].queueSize = 0;
-            } else {
-              newWorkstations[j].queueSize = 0;
-            }
-          }
-          //make incoming queue size available
-          for (let j = 0; j < state.workstationCount; j++) {
-            newWorkstations[j].queueSize += newWorkstations[j].incomingQueueSize;
-          }
+      }
+    case RUN_TURN:
+      {
+        newState = objectAssign({}, state);
+        if (newState.currentWorkstationId == newState.workstationCount - 1) {
+          newState.runsCount += 1;
         }
-        newState['workstations'] = newWorkstations;
+
+        let newCurrentWorkstation = objectAssign({}, state.workstations[newState.currentWorkstationId]);
+        let newNextWorkstation = objectAssign({}, state.workstations[newState.currentWorkstationId + 1]);
+
+        newCurrentWorkstation.dice = { status: NOT_SPINNING };
+
+        let addToNextBucket = (itemCountToAdd) => {
+          if (newState.currentWorkstationId == newState.workstationCount - 1) {
+            newState.doneCount += itemCountToAdd;
+          } else {
+            newNextWorkstation.queueSize += itemCountToAdd;
+          }
+          return;
+        };
+
+        let currentCapacity = workstationHelper().getRandomDiceRoll();
+        newCurrentWorkstation.variantCapacity = currentCapacity;
+        if (newCurrentWorkstation.queueSize >= currentCapacity) {
+          addToNextBucket(currentCapacity);
+          newCurrentWorkstation.queueSize -= currentCapacity;
+        } else if (newCurrentWorkstation.queueSize < currentCapacity) {
+          addToNextBucket(newCurrentWorkstation.queueSize);
+          newCurrentWorkstation.queueSize = 0;
+        } else {
+          newCurrentWorkstation.queueSize = 0;
+        }
+
+        newState.workstations = workstationHelper().update(state.workstations, state.currentWorkstationId, newCurrentWorkstation);
+
+        //set next current workstation
+        if (newState.currentWorkstationId == newState.workstationCount - 1) {
+          newState.currentWorkstationId = 0;
+        } else {
+          newState.currentWorkstationId += 1;
+        }
+
+        if (newState.currentTurnOfIterationCount === newState.iterationCount) {
+          newNextWorkstation.dice = { status: "no dice" };
+          newState.currentTurnOfIterationCount = 1;
+        } else {
+          newState.continue = true;
+          newState.currentTurnOfIterationCount += 1;
+        }
+        newState.workstations = workstationHelper().update(newState.workstations, newState.currentWorkstationId, newNextWorkstation);
+
         return newState;
       }
-
     case RUN_TURNS:
       {
         //new state

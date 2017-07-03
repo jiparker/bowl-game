@@ -18,9 +18,9 @@ export function setIterationCount(settings, fieldName, value) {
   };
 }
 
-export function runIterations(settings) {
+export function runTurn(settings) {
   return {
-    type: types.RUN_ITERATIONS,
+    type: types.ROLL,
     settings
   };
 }
@@ -40,7 +40,7 @@ export function timerStart(timer) {
 }
 export function timerTrigger(timer) {
   return {
-    type: types.TIMER_TRIGGER,
+    type: types.RUN_TURN,
     timer
   };
 }

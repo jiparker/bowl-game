@@ -9,7 +9,7 @@ class GameSettingsForm extends React.Component {
     super(props, context);
     this.workstationCountKeyPress = this.workstationCountKeyPress.bind(this);
     this.iterationCountKeyPress = this.iterationCountKeyPress.bind(this);
-    this.runIterations = this.runIterations.bind(this);
+    this.runTurn = this.runTurn.bind(this);
     this.runTurns = this.runTurns.bind(this);
   }
 
@@ -21,8 +21,8 @@ class GameSettingsForm extends React.Component {
     this.props.setIterationCount(this.props.gameData, name, value);
   }
 
-  runIterations() {
-    this.props.runIterations(this.props.gameData);
+  runTurn() {
+    this.props.runTurn(this.props.gameData);
   }
 
   runTurns() {
@@ -31,6 +31,8 @@ class GameSettingsForm extends React.Component {
 
   render() {
     const {gameData} = this.props;
+    const turnButtonText = `Run ${this.props.gameData.iterationCount} Turn(s)`;
+    const iterationButtonText = `Run ${this.props.gameData.iterationCount} Iteration(s)`;
 
     return (
       <table>
@@ -46,8 +48,10 @@ class GameSettingsForm extends React.Component {
             <td>
               <label htmlFor="interationCount">Number of Turns</label>
             </td>
-            <td><TextInput onChange={this.iterationCountKeyPress} name="iterationCount" placeholder="enter number" value={gameData.iterationCount}/>
-              <button onClick={this.runTurns}>Go</button>
+            <td>
+              <TextInput onChange={this.iterationCountKeyPress} name="iterationCount" placeholder="enter number" value={gameData.iterationCount}/>
+              <button onClick={this.runTurn}>{turnButtonText}</button>
+              <button>{iterationButtonText}</button>
             </td>
           </tr>
         </tbody>
@@ -58,7 +62,7 @@ class GameSettingsForm extends React.Component {
 GameSettingsForm.propTypes = {
   setupWorkstations: PropTypes.func.isRequired,
   setIterationCount: PropTypes.func.isRequired,
-  runIterations: PropTypes.func.isRequired,
+  runTurn: PropTypes.func.isRequired,
   runTurns: PropTypes.func.isRequired,
   gameData: PropTypes.object.isRequired
 };

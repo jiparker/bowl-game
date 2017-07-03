@@ -8,7 +8,9 @@ describe('<MainPage />', () => {
     const actions = {
       setupWorkstations: () => {},
       runIterations: () => {},
-      setIterationCount: () => {}
+      setIterationCount: () => {},
+      runTurns: () => {},
+      runTurn: () => {}
     };
     const gameData = {};
     const wrapper = shallow(<MainPage actions={actions} gameData={gameData}/>);
