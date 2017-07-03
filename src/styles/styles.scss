@@ -24,7 +24,7 @@ td {
 	padding: 12px;
 }
 td:last-child {
-    width: 200px;
+    width: 380px;
 }
 
 h2 {
@@ -41,6 +41,10 @@ text-decoration: none;}
 a:visited {color:$fg-blue;}
 a:hover {color:$hi-lite-blue;}
 a:active {color:$fg-blue;}
+
+div.slider {
+  width: 130px;
+}
 
 header {
   width: 100%;

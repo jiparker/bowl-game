@@ -1,6 +1,6 @@
 export default {
   gameData: {
-    workstationCount: '',
+    workstationCount: 0,
     workstations: [],
     iterationCount: 1,
     currentTurnOfIterationCount: 1,

@@ -1,4 +1,4 @@
-import { SETUP_WORKSTATIONS, SET_ITERATION_COUNT, RUN_TURNS, RUN_TURN, ROLL, TIMER_START, TIMER_TRIGGER } from '../constants/actionTypes';
+import { SETUP_WORKSTATIONS, SET_ITERATION_COUNT, RUN_TURN, ROLL, TIMER_START, TIMER_TRIGGER } from '../constants/actionTypes';
 import objectAssign from 'object-assign';
 import initialState from './initialState';
 import workstationHelper from '../utils/workstationHelper';
@@ -54,11 +54,14 @@ export default function gameDataReducer(state = initialState.gameData, action) {
       {
         newState = objectAssign({}, state);
         newState.continue = true;
+        newState.isIterations = action.isIterations;
         return newState;
 
       }
     case RUN_TURN:
       {
+        let multiplier = state.isIterations ? state.workstationCount : 1;
+        console.log(`multiplier!!!!   ${multiplier}`)
         newState = objectAssign({}, state);
         if (newState.currentWorkstationId == newState.workstationCount - 1) {
           newState.runsCount += 1;
@@ -99,7 +102,7 @@ export default function gameDataReducer(state = initialState.gameData, action) {
           newState.currentWorkstationId += 1;
         }
 
-        if (newState.currentTurnOfIterationCount === newState.iterationCount) {
+        if (newState.currentTurnOfIterationCount === newState.iterationCount * multiplier) {
           newNextWorkstation.dice = { status: "no dice" };
           newState.currentTurnOfIterationCount = 1;
         } else {
@@ -110,51 +113,6 @@ export default function gameDataReducer(state = initialState.gameData, action) {
 
         return newState;
       }
-    case RUN_TURNS:
-      {
-        //new state
-        newState = objectAssign({}, state);
-        let newWorkstations = state.workstations.map((w) => {
-          return { ...w };
-        });
-
-        for (let i = 0; i < state.iterationCount; i++) {
-          if (newState.currentWorkstation == newState.workstationCount - 1) {
-            newState.runsCount += 1;
-          }
-
-          let addToNextBucket = (itemCountToAdd) => {
-            if (newState.currentWorkstation == newState.workstationCount - 1) {
-              newState.doneCount += itemCountToAdd;
-            } else {
-              newWorkstations[newState.currentWorkstation + 1].queueSize += itemCountToAdd;
-            }
-            return;
-          };
-
-          let currentCapacity = 1;
-          newState.workstations[i].variantCapacity = currentCapacity;
-          if (newWorkstations[newState.currentWorkstation].queueSize >= currentCapacity) {
-            addToNextBucket(currentCapacity);
-            newWorkstations[newState.currentWorkstation].queueSize -= currentCapacity;
-          } else if (newWorkstations[newState.currentWorkstation].queueSize < currentCapacity) {
-            addToNextBucket(newWorkstations[newState.currentWorkstation].queueSize);
-            newWorkstations[newState.currentWorkstation].queueSize = 0;
-          } else {
-            newWorkstations[newState.currentWorkstation].queueSize = 0;
-          }
-          //set next current workstation
-          if (newState.currentWorkstation == newState.workstationCount - 1) {
-            newState.currentWorkstation = 0;
-          } else {
-            newState.currentWorkstation += 1;
-          }
-        }
-        newState['workstations'] = newWorkstations;
-        return newState;
-
-      }
-
     default:
       return state;
   }

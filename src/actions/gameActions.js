@@ -21,14 +21,16 @@ export function setIterationCount(settings, fieldName, value) {
 export function runTurn(settings) {
   return {
     type: types.ROLL,
-    settings
+    settings,
+    isIterations: false
   };
 }
 
-export function runTurns(settings) {
+export function runIterations(settings) {
   return {
-    type: types.RUN_TURNS,
-    settings
+    type: types.ROLL,
+    settings,
+    isIterations: true
   };
 }
 

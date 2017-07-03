@@ -11,7 +11,7 @@ export const MainPage = (props) => {
   let setUp = props.actions.setupWorkstations;
   let setCount = props.actions.setIterationCount;
   let runT = props.actions.runTurn;
-  let runTs = props.actions.runTurns;
+  let runIs = props.actions.runIterations;
   let timerActions = {
     start: props.actions.timerStart,
     trigger: props.actions.timerTrigger,
@@ -25,7 +25,7 @@ export const MainPage = (props) => {
   return (
 
     <main>
-      <GameSettingsForm setupWorkstations={setUp} setIterationCount={setCount} runTurn={runT} runTurns={runTs} gameData={props.gameData}/> {timer}
+      <GameSettingsForm setupWorkstations={setUp} setIterationCount={setCount} runTurn={runT} runIterations={runIs} gameData={props.gameData}/> {timer}
       <table>
         <tbody>
           <Workstations gameData={props.gameData} timerActions={timerActions}/>

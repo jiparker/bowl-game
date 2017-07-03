@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextInput from './TextInput';
+import InputRange from 'react-input-range';
 
 // import Report from './Report';
 
@@ -10,11 +11,19 @@ class GameSettingsForm extends React.Component {
     this.workstationCountKeyPress = this.workstationCountKeyPress.bind(this);
     this.iterationCountKeyPress = this.iterationCountKeyPress.bind(this);
     this.runTurn = this.runTurn.bind(this);
-    this.runTurns = this.runTurns.bind(this);
+    this.runIterations = this.runIterations.bind(this);
+    this.state = {
+      value: 1
+    };
   }
 
-  workstationCountKeyPress(name, value) {
-    this.props.setupWorkstations(this.props.gameData, name, value);
+  workstationCountKeyPress(value) {
+    this.setState({value});
+    this.props.setupWorkstations(this.props.gameData, "workstationCount", value);
+  }
+
+  firing(value) {
+    this.setState({value});
   }
 
   iterationCountKeyPress(name, value) {
@@ -25,8 +34,8 @@ class GameSettingsForm extends React.Component {
     this.props.runTurn(this.props.gameData);
   }
 
-  runTurns() {
-    this.props.runTurns(this.props.gameData);
+  runIterations() {
+    this.props.runIterations(this.props.gameData);
   }
 
   render() {
@@ -41,7 +50,10 @@ class GameSettingsForm extends React.Component {
             <td>
               <label htmlFor="workstationCount">Number of Workstations</label>
             </td>
-            <td><TextInput onChange={this.workstationCountKeyPress} name="workstationCount" placeholder="enter number" value={gameData.workstationCount}/>
+            <td>
+              <div className="slider">
+                <InputRange maxValue={10} minValue={1} name="workstationCount" value={this.state.value} onChange={this.workstationCountKeyPress}/>
+              </div>
             </td>
           </tr>
           <tr>
@@ -51,7 +63,7 @@ class GameSettingsForm extends React.Component {
             <td>
               <TextInput onChange={this.iterationCountKeyPress} name="iterationCount" placeholder="enter number" value={gameData.iterationCount}/>
               <button onClick={this.runTurn}>{turnButtonText}</button>
-              <button>{iterationButtonText}</button>
+              <button onClick={this.runIterations}>{iterationButtonText}</button>
             </td>
           </tr>
         </tbody>
@@ -63,7 +75,7 @@ GameSettingsForm.propTypes = {
   setupWorkstations: PropTypes.func.isRequired,
   setIterationCount: PropTypes.func.isRequired,
   runTurn: PropTypes.func.isRequired,
-  runTurns: PropTypes.func.isRequired,
+  runIterations: PropTypes.func.isRequired,
   gameData: PropTypes.object.isRequired
 };
 
