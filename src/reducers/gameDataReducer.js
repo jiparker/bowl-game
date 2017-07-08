@@ -1,4 +1,4 @@
-import { SETUP_WORKSTATIONS, SET_ITERATION_COUNT, RUN_TURN, ROLL, TIMER_START, TIMER_TRIGGER } from '../constants/actionTypes';
+import { SETUP_WORKSTATIONS, RUN_TURN, ROLL, TIMER_START, TIMER_TRIGGER } from '../constants/actionTypes';
 import objectAssign from 'object-assign';
 import initialState from './initialState';
 import workstationHelper from '../utils/workstationHelper';
@@ -45,10 +45,6 @@ export default function gameDataReducer(state = initialState.gameData, action) {
         }
         return newState;
       }
-    case SET_ITERATION_COUNT:
-      newState = objectAssign({}, state);
-      newState[action.fieldName] = action.value;
-      return newState;
 
     case ROLL:
       {
@@ -61,7 +57,6 @@ export default function gameDataReducer(state = initialState.gameData, action) {
     case RUN_TURN:
       {
         let multiplier = state.isIterations ? state.workstationCount : 1;
-        console.log(`multiplier!!!!   ${multiplier}`)
         newState = objectAssign({}, state);
         if (newState.currentWorkstationId == newState.workstationCount - 1) {
           newState.runsCount += 1;

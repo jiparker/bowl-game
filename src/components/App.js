@@ -10,7 +10,7 @@ class App extends React.Component {
     return (
       <div>
         <header>
-          <h2>Game Name</h2>
+          <h2>Tick TOC - The Goldratt Dice Game</h2>
         </header>
         <br/> {this.props.children}
         <footer>

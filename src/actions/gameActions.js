@@ -9,15 +9,6 @@ export function setupWorkstations(settings, fieldName, value) {
   };
 }
 
-export function setIterationCount(settings, fieldName, value) {
-  return {
-    type: types.SET_ITERATION_COUNT,
-    settings,
-    fieldName,
-    value
-  };
-}
-
 export function runTurn(settings) {
   return {
     type: types.ROLL,
