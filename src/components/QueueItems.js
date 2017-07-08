@@ -4,7 +4,7 @@ import ballFactory from '../utils/ballFactory';
 
 const QueueItems = (props) => {
 
-  let ballObjects = ballFactory().buildBallObjects(props.queueSize);
+  let ballObjects = ballFactory().buildBallObjects(props.queueSize, props.newInQueue);
   let items = [];
 
   for (let i = 0; i < 20; i++) {
@@ -18,7 +18,8 @@ const QueueItems = (props) => {
 };
 
 QueueItems.propTypes = {
-  queueSize: PropTypes.number.isRequired
+  queueSize: PropTypes.number.isRequired,
+  newInQueue: PropTypes.number.isRequired
 };
 
 export default QueueItems;

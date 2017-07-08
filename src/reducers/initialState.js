@@ -6,6 +6,7 @@ export default {
     currentTurnOfIterationCount: 1,
     runsCount: 0,
     doneCount: 0,
+    newInDone: 0,
     currentWorkstationId: 0
   }
 };

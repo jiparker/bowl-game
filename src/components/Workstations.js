@@ -12,7 +12,7 @@ const Workstations = (props) => {
   }
   let done = (
     <td key={1000}>
-      <DoneBucket doneCount={props.gameData.doneCount} runsCount={props.gameData.runsCount}/>
+      <DoneBucket doneCount={props.gameData.doneCount} runsCount={props.gameData.runsCount} newInDone={props.gameData.newInDone}/>
 
     </td>
   );

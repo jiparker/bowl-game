@@ -3,6 +3,7 @@ $bg-blue: #c8cce6;
 $fg-blue: #1f37bb;
 $hi-lite-blue: #949fde;
 $ball-color: #3B3B00;
+$ball-new-color: #d43636;
 $background: #f7ede1;
 $hi-lite-player: #d3d5e8;
 
@@ -91,6 +92,16 @@ div.ball {
 div.ball.on {
   background-color: $ball-color;
 }
+@keyframes red-fade {
+   0% {background: #d43636;}
+   100% {background: #3B3B00;}
+}
+div.ball.new {
+  background: #3B3B00;
+  -webkit-animation: red-fade 2s ease-in 1;
+  animation: red-fade 2s ease-in 1;
+}
+
 div.ball.off {
   background-color: $background;
 }

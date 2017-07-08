@@ -1,7 +1,7 @@
 const ballFactory = () => {
 
   return {
-    buildBallObjects: function(size) {
+    buildBallObjects: function(size, newInQueue) {
       size = size > 20 ? 20 : size;
 
       let ballObjects = [];
@@ -11,7 +11,11 @@ const ballFactory = () => {
         ballObjects[i] = { clazzName: 'off' };
       }
 
-      for (let i = offBallCount; i < 20; i++) {
+      for (let i = offBallCount; i < offBallCount + newInQueue; i++) {
+        ballObjects[i] = { clazzName: 'new' };
+      }
+
+      for (let i = offBallCount + newInQueue; i < 20; i++) {
         ballObjects[i] = { clazzName: 'on' };
       }
 

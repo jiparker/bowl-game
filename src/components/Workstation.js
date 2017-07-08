@@ -11,7 +11,7 @@ const Workstation = (props) => {
   let station = (
     <td>
       <div className="queue">
-        <QueueItems queueSize={props.workstation.queueSize}/>
+        <QueueItems queueSize={props.workstation.queueSize} newInQueue={props.workstation.newInQueue}/>
       </div>
       <div className={clazz}>
         {image}

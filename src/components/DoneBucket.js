@@ -10,7 +10,7 @@ const DoneBucket = (props) => {
   return (
     <div className="bucket">
       <div className="queue done">
-        <QueueItems queueSize={props.doneCount}/>
+        <QueueItems queueSize={props.doneCount} newInQueue={props.newInDone}/>
       </div>
       <div>{total}</div>
       <div>{runs}</div>
@@ -20,7 +20,8 @@ const DoneBucket = (props) => {
 };
 DoneBucket.propTypes = {
   doneCount: PropTypes.number.isRequired,
-  runsCount: PropTypes.number.isRequired
+  runsCount: PropTypes.number.isRequired,
+  newInDone: PropTypes.number.isRequired
 };
 
 export default DoneBucket;

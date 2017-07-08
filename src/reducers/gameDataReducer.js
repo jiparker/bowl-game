@@ -39,7 +39,7 @@ export default function gameDataReducer(state = initialState.gameData, action) {
 
         newState.workstations = [];
         for (let i = 0; i < newState.workstationCount; i++) {
-          let ws = { id: i + 1, queueSize: 0, incomingQueueSize: 0, imageNumber: getRandomInt(i), variantCapacity: 1, dice: { status: "no dice" } };
+          let ws = { id: i + 1, queueSize: 0, newInQueue: 0, imageNumber: getRandomInt(i), variantCapacity: 1, dice: { status: "no dice" } };
           if (i == 0) { ws.queueSize = 2000; }
           newState.workstations.push(ws);
         }
@@ -52,15 +52,11 @@ export default function gameDataReducer(state = initialState.gameData, action) {
         newState.continue = true;
         newState.isIterations = action.isIterations;
         return newState;
-
       }
     case RUN_TURN:
       {
         let multiplier = state.isIterations ? state.workstationCount : 1;
         newState = objectAssign({}, state);
-        if (newState.currentWorkstationId == newState.workstationCount - 1) {
-          newState.runsCount += 1;
-        }
 
         let newCurrentWorkstation = objectAssign({}, state.workstations[newState.currentWorkstationId]);
         let newNextWorkstation = objectAssign({}, state.workstations[newState.currentWorkstationId + 1]);
@@ -68,10 +64,13 @@ export default function gameDataReducer(state = initialState.gameData, action) {
         newCurrentWorkstation.dice = { status: NOT_SPINNING };
 
         let addToNextBucket = (itemCountToAdd) => {
+          newCurrentWorkstation.newInQueue = 0;
           if (newState.currentWorkstationId == newState.workstationCount - 1) {
             newState.doneCount += itemCountToAdd;
+            newState.newInDone = itemCountToAdd;
           } else {
             newNextWorkstation.queueSize += itemCountToAdd;
+            newNextWorkstation.newInQueue = itemCountToAdd;
           }
           return;
         };
@@ -89,6 +88,11 @@ export default function gameDataReducer(state = initialState.gameData, action) {
         }
 
         newState.workstations = workstationHelper().update(state.workstations, state.currentWorkstationId, newCurrentWorkstation);
+
+        //increment runsCount/iteration number if at last workstation
+        if (newState.currentWorkstationId == newState.workstationCount - 1) {
+          newState.runsCount += 1;
+        }
 
         //set next current workstation
         if (newState.currentWorkstationId == newState.workstationCount - 1) {

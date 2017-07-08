@@ -11,7 +11,10 @@ class GameSettingsForm extends React.Component {
     this.state = {
       value: 6
     };
-    this.workstationCountKeyPress(6);
+  }
+
+  componentDidMount() {
+    this.workstationCountKeyPress(this.state.value);
   }
 
   workstationCountKeyPress(value) {
@@ -64,7 +67,6 @@ class GameSettingsForm extends React.Component {
 }
 GameSettingsForm.propTypes = {
   setupWorkstations: PropTypes.func.isRequired,
-  setIterationCount: PropTypes.func.isRequired,
   runTurn: PropTypes.func.isRequired,
   runIterations: PropTypes.func.isRequired,
   gameData: PropTypes.object.isRequired
